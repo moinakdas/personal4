@@ -43,7 +43,17 @@ function App() {
         </div>
       </div>
       <div id = "title-container">
-        
+        <div id = "stylized-name">Moinak Das</div>
+        <div id = "job-title">MECHANICAL ENGINEER</div>
+        <div id = "links-container-outer">
+          <div id = "links-container-inner">
+            <div class = "link-entry-container">
+              <div class = "link-entry-icon-container">
+                
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
