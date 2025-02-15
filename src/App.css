@@ -22,14 +22,16 @@ a{
 }
 
 .App{
-  height: 100vh;
+  height: 200vh;
   width: 100vw;
   overflow-y: hidden;
   user-select: none;
+  overflow-x:hidden;
+  background-color: #151414;
 }
 
 #graphics-container{
-  position: absolute;
+  position: fixed;
   top:50%;
   transform: translateY(-50%);
   left:1vw;
@@ -39,7 +41,7 @@ a{
 
 #background-grid{
   content: url("../public/img/background-grid.svg");
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   height: 100%;
@@ -142,7 +144,7 @@ a{
 }
 
 #title-container{
-  position: absolute;
+  position: fixed;
   right: 2vw;
   top:25vh;
   height: 70vh;
@@ -254,4 +256,9 @@ a{
 
 #yellow-dot{
   content: url("../public/img/yellow-dot.svg");
+}
+
+.headshot-images,
+.header-box {
+  transition: transform 0.5s ease-out, opacity 0.5s ease-out;
 }
