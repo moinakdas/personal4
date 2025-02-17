@@ -1,30 +1,12 @@
 import logo from './logo.svg';
 import { BrowserRouter as Router, Route, Routes, useNavigate  } from "react-router-dom";
 import { Link } from "react-router-dom";
-import React, {useEffect} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import './App.css';
-import About from './About';
 
 function App() {
   
-  const navigate = useNavigate(); // Hook to navigate programmatically
-
-  useEffect(() => {
-    // Scroll event listener
-    const handleScroll = () => {
-      if (window.scrollY >= window.innerHeight) { // 20rem = 320px (16px per rem)
-        navigate("/about"); // Navigate to About page after 20rem scroll
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    // Clean up the event listener when the component unmounts
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [navigate]);
-
+  //transform operations onscroll for header-boxes and headshots
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
@@ -75,6 +57,7 @@ function App() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
   
+  //onhover arrow shit
   useEffect(() => {
     // Select all the link-entry-container elements
     const linkEntryContainers = document.querySelectorAll('.link-entry-container');
@@ -114,6 +97,7 @@ function App() {
     };
   }, []);
 
+  //floating movement with mousemove for header-boxes and headshots
   useEffect(() => {
     const elements = [
       { id: "headshot-1", scale: -0.01 },
@@ -155,40 +139,40 @@ function App() {
 
   return (
     <div className="App">
-      <img id="background-grid"></img>
+      <img id="background-grid-landing"></img>
       <div id="graphics-container">
-        <img id="headshot-1" class="headshot-images"></img>
-        <img id="headshot-2" class="headshot-images"></img>
-        <div class="header-box" id="header-box-1"></div>
-        <div class="header-box" id="header-box-2"></div>
-        <div class="header-box" id="header-box-3"></div>
-        <div class="note-container" id="note-1">
-          <div class="icon-container">
-            <img class="plus-icon"></img>
+        <img id="headshot-1" className="headshot-images"></img>
+        <img id="headshot-2" className="headshot-images"></img>
+        <div className="header-box" id="header-box-1"></div>
+        <div className="header-box" id="header-box-2"></div>
+        <div className="header-box" id="header-box-3"></div>
+        <div className="note-container" id="note-1">
+          <div className="icon-container">
+            <img className="plus-icon"></img>
           </div>
-          <div class="note-description">Field Engineer @ TCE</div>
+          <div className="note-description">Field Engineer @ TCE</div>
         </div>
-        <div class="note-container" id="note-2">
-          <div class="icon-container">
-            <img class="plus-icon"></img>
+        <div className="note-container" id="note-2">
+          <div className="icon-container">
+            <img className="plus-icon"></img>
           </div>
-          <div class="note-description">
+          <div className="note-description">
             Seven years of professional experience
           </div>
         </div>
-        <div class="note-container" id="note-3">
-          <div class="icon-container">
-            <img class="plus-icon"></img>
+        <div className="note-container" id="note-3">
+          <div className="icon-container">
+            <img className="plus-icon"></img>
           </div>
-          <div class="note-description">
+          <div className="note-description">
             Undergraduate Researcher @<br></br> Interacting Robotics Systems <br></br> Laboratory
           </div>
         </div>
-        <div class="note-container" id="note-4">
-          <div class="icon-container">
-            <img class="plus-icon"></img>
+        <div className="note-container" id="note-4">
+          <div className="icon-container">
+            <img className="plus-icon"></img>
           </div>
-          <div class="note-description">
+          <div className="note-description">
           Undergraduate Researcher @<br></br> Stony Brook Dept. of Computer <br></br> Science
           </div>
         </div>
@@ -196,48 +180,48 @@ function App() {
       <div id = "title-container">
         <div id = "stylized-name">Moinak Das</div>
         <div id = "job-title">MECHANICAL ENGINEER</div>
-        <div class = "links-container-outer">
-          <div class = "links-container-inner" id="links-container-inner">
-            <a href="https://github.com/moinakdas"><div class = "link-entry-container">
-              <div class = "link-entry-icon-container">
-                <img class = "arrow-icon"></img>
-                <img class = "item-dot" id = "green-dot"></img>
+        <div className = "links-container-outer">
+          <div className = "links-container-inner" id="links-container-inner">
+            <a href="https://github.com/moinakdas"><div className = "link-entry-container">
+              <div className = "link-entry-icon-container">
+                <img className = "arrow-icon"></img>
+                <img className = "item-dot" id = "green-dot"></img>
               </div>
-              <div class = "link-entry-label-container">
+              <div className = "link-entry-label-container">
                 GitHub
               </div>
             </div></a>
-            <a href="https://github.com/moinakdas"><div class = "link-entry-container" href="#">
-              <div class = "link-entry-icon-container">
-                <img class = "arrow-icon"></img>
-                <img class = "item-dot" id = "blue-dot"></img>
+            <a href="https://github.com/moinakdas"><div className = "link-entry-container" href="#">
+              <div className = "link-entry-icon-container">
+                <img className = "arrow-icon"></img>
+                <img className = "item-dot" id = "blue-dot"></img>
               </div>
-              <div class = "link-entry-label-container">
+              <div className = "link-entry-label-container">
                 LinkedIn
               </div>
             </div></a>
-            <a href="https://github.com/moinakdas"><div class = "link-entry-container" href="#">
-              <div class = "link-entry-icon-container">
-                <img class = "arrow-icon"></img>
-                <img class = "item-dot" id = "purple-dot"></img>
+            <a href="https://github.com/moinakdas"><div className = "link-entry-container" href="#">
+              <div className = "link-entry-icon-container">
+                <img className = "arrow-icon"></img>
+                <img className = "item-dot" id = "purple-dot"></img>
               </div>
-              <div class = "link-entry-label-container">
+              <div className = "link-entry-label-container">
                 Resume
               </div>
             </div></a>
-            <a href="https://github.com/moinakdas"><div class = "link-entry-container" href="#">
-              <div class = "link-entry-icon-container">
-                <img class = "arrow-icon"></img>
-                <img class = "item-dot" id = "orange-dot"></img>
+            <a href="https://github.com/moinakdas"><div className = "link-entry-container" href="#">
+              <div className = "link-entry-icon-container">
+                <img className = "arrow-icon"></img>
+                <img className = "item-dot" id = "orange-dot"></img>
               </div>
-              <div class = "link-entry-label-container">
+              <div className = "link-entry-label-container">
                 Projects
               </div>
             </div></a>
-            <a href="https://github.com/moinakdas"><div class = "link-entry-container" href="#">
-              <div class = "link-entry-icon-container">
-                <img class = "arrow-icon"></img>
-                <img class = "item-dot" id = "yellow-dot"></img>
+            <a href="https://github.com/moinakdas"><div className = "link-entry-container" href="#">
+              <div className = "link-entry-icon-container">
+                <img className = "arrow-icon"></img>
+                <img className = "item-dot" id = "yellow-dot"></img>
               </div>
               <div class = "link-entry-label-container">
                 Contact
@@ -250,15 +234,5 @@ function App() {
   );
 }
 
-function AppWrapper() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/about" element={<About />} />
-      </Routes>
-    </Router>
-  );
-}
 
-export default AppWrapper;
+export default App;

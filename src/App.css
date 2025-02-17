@@ -39,12 +39,13 @@ a{
   width: 98vw;
 }
 
-#background-grid{
+#background-grid-landing{
   content: url("../public/img/background-grid.svg");
   position: fixed;
   top: 0;
   left: 0;
   height: 100%;
+  z-index: 0;
 }
 
 .headshot-images{
@@ -262,3 +263,7 @@ a{
 .header-box {
   transition: transform 0.5s ease-out, opacity 0.5s ease-out;
 }
+
+/* ::-webkit-scrollbar {
+  display: none;
+} */

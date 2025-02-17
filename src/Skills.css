@@ -1,0 +1,109 @@
+.Skills{
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    height: 100vh;
+}
+
+#card-container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 80%;
+    height: 80%;
+    display: flex;
+    gap: 1.5%;
+}
+
+.card{
+    position: relative;
+    background-color: #1C1C1C;
+    border-radius: max(1.5vw,0.75rem);
+    height: 100%;
+}
+
+#card-1{
+    flex: 1.4
+}
+
+#card-2{
+    flex: 1.2
+}
+
+#card-3{
+    flex: 1
+}
+
+.numerical-label{
+    position: absolute;
+    top: 1vw;
+    left: 1vw;
+    height: 6vw;
+    width: 6vw;
+    border-radius: 1vw;
+}
+
+#numerical-label-1{
+    background-color: #80F878;
+}
+
+#numerical-label-2{
+    background-color: #70FFF8;
+}
+
+#numerical-label-3{
+    background-color: #E4E955;
+}
+
+.numerical-label-img{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 70%;
+}
+
+#numerical-label-img-1{
+    content: url("../public/img/01.svg");
+}
+
+#numerical-label-img-2{
+    content: url("../public/img/02.svg");
+}
+
+#numerical-label-img-3{
+    content: url("../public/img/03.svg");
+}
+
+.card-label{
+    position: absolute;
+    transform: translateX(-50%);
+    bottom: 2.5vw;
+    left: 3.5vw;
+}
+
+#card-label-1{
+    content: url("../public/img/industry-label.svg");
+}
+
+#card-label-2{
+    content: url("../public/img/research-label.svg");
+}
+
+#card-label-3{
+    content: url("../public/img/projects-label.svg");
+}
+
+.card-description-container{
+    position: absolute;
+    left: 8vw;
+    top: 50%;
+    transform: translateY(-50%);
+    height: calc(100% - 8vw);
+    width: calc(100% - 9vw);
+    font-family: "thabit";
+    color: white;
+    font-size: 1vw;
+    line-height: 1.2vw;
+}

@@ -1,17 +1,15 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-import { useNavigate } from 'react-router-dom';
-import React, {useEffect, useState } from 'react';
+import { useNavigate, useLocation  } from 'react-router-dom';
+import React, {useEffect, useState, useRef } from 'react';
 import './About.css';
 
 // MyComponent.js
 function About() {
 
-    const [coloredText, setColoredText] = useState('');
+  const [coloredText, setColoredText] = useState("");
   const [scrollPosition, setScrollPosition] = useState(0);
-
-  const navigate = useNavigate(); // Hook to navigate
 
   useEffect(() => {
     const text = `Whether it's pulling 70 hour weeks in construction or training neural networks on point 
@@ -21,57 +19,51 @@ function About() {
     me with a unique perspective to tackle future challenges.`;
 
     const colorizeText = (text) => {
-      return text.split('').map((char, index) => {
-        // Initial color is #414141 for all letters
-        const color = '#414141';
-        return `<span class="letter" data-index="${index}" style="color: ${color}">${char}</span>`;
-      }).join('');
+      return text
+        .split("")
+        .map(
+          (char, index) =>
+            `<span class="letter" data-index="${index}" style="color: #414141">${char}</span>`
+        )
+        .join("");
     };
 
-    setColoredText(colorizeText(text)); // Set the colored text
+    setColoredText(colorizeText(text)); // Set the initial colored text
+  }, []);
 
-    // Event listener for scroll
-    const handleScroll = () => {
-      setScrollPosition(window.scrollY);
-
-      // When scrolled to the top of the page, navigate to the App component
-      if (window.scrollY === 0) {
-        navigate("/"); // Navigate to home (App.js)
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [navigate]);
-
+  // Track scroll position
   useEffect(() => {
-    // Update letter colors based on scroll position
-    const letters = document.querySelectorAll('.letter');
-    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const handleScroll = () => {
+      const maxScroll =
+        document.documentElement.scrollHeight - window.innerHeight;
+      const scroll = window.scrollY;
+      setScrollPosition(scroll / maxScroll); // Normalize between 0 and 1
+    };
 
-    // Calculate the scroll threshold for each letter
-    const lettersToUpdate = Math.floor(scrollPosition / (window.innerHeight * 0.006)); // Every 16px scroll updates one letter
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Update letter colors based on scroll position
+  useEffect(() => {
+    const letters = document.querySelectorAll(".letter");
+    const totalLetters = letters.length;
+    const startScroll = window.innerHeight * 1.5;
+    const endScroll = startScroll + window.innerHeight * 2.5;
+
+    let progress =
+      (window.scrollY - startScroll) / (endScroll - startScroll);
+    progress = Math.min(Math.max(progress, 0), 1); // Clamp between 0 and 1
+
+    const lettersToUpdate = Math.floor(progress * totalLetters);
 
     letters.forEach((letter, index) => {
-      // Only change the color for the letters that should be updated
-      if (index <= lettersToUpdate) {
-        letter.style.color = '#FFFFFF'; // Change color to white for this letter
-      }
+      letter.style.color = index < lettersToUpdate ? "#FFFFFF" : "#414141";
     });
-
-    // Calculate the margin-top value for the about-description-container
-    const maxScrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const marginTopValue = Math.max(35, 70 - (scrollPosition / maxScrollHeight) * 35); // From 70vh to 30vh
-    const aboutDescriptionContainer = document.getElementById('about-description-container');
-    if (aboutDescriptionContainer) {
-      aboutDescriptionContainer.style.marginTop = `${marginTopValue}vh`;
-    }
   }, [scrollPosition]);
 
     //ABOUT scroll mechanic
+   
     useEffect(() => {
         const speed = 0.5; // Adjust speed of movement
         const elements = document.querySelectorAll(".about-solid, .about-outline");
@@ -111,8 +103,9 @@ function About() {
     }, []);
 
     return (
+      <div className="about-container" style={{height:"300vh"}}>
         <div className="About">
-            <img id="background-grid"></img>
+            <img id="background-grid-about"></img>
             <div id="about-bar">
                 <img class = "about-solid"></img>
                 <img class = "about-outline"></img>
@@ -124,6 +117,7 @@ function About() {
             <div id="about-description-container" dangerouslySetInnerHTML={{ __html: coloredText }} />
             <div id="description-buffer"></div>
         </div>
+      </div>
     );
 }
     
