@@ -27,29 +27,48 @@ a{
     top: 0;
     left: 0;
     height: 100%;
+    z-index: -1;
 }
 
-#about-bar{
+#about-bar {
     position: fixed;
-    top:8vh;
-    left:0vh;
+    overflow: hidden;
+    white-space: nowrap;
+    top: 8vh;
+    left: 0;
     width: 100%;
     height: 10vh;
-    background-color: red;
 }
 
 .about-solid{
     content: url("../public/img/about-solid.svg");
+    position: absolute; /* Ensures movement works */
     height: 100%;
-    top:50%;
     display: inline-block;
     margin-right: 2rem;
 }
 
 .about-outline{
     content: url("../public/img/about-outline.svg");
+    position: absolute; /* Ensures movement works */
     height: 100%;
-    top:50%;
     display: inline-block;
     margin-right: 2rem;
+}
+
+#about-description-container{
+    color: #fff;
+    font-family: Saira;
+    font-size: 3.75rem;
+    line-height: 4.5rem;
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 30vh; /* Starts at the bottom */
+    position: fixed; /* Fixed so it locks */
+    z-index: 1000;
+}
+
+#description-buffer{
+    width: 100%;
+    height: 400vh;
 }

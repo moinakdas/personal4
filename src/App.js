@@ -12,7 +12,7 @@ function App() {
   useEffect(() => {
     // Scroll event listener
     const handleScroll = () => {
-      if (window.scrollY >= 20 * 16) { // 20rem = 320px (16px per rem)
+      if (window.scrollY >= window.innerHeight) { // 20rem = 320px (16px per rem)
         navigate("/about"); // Navigate to About page after 20rem scroll
       }
     };
@@ -28,7 +28,7 @@ function App() {
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
-      const maxScroll = 320; // 20rem in pixels (assuming 1rem = 16px)
+      const maxScroll = window.innerHeight; // 20rem in pixels (assuming 1rem = 16px)
       const scrollFactor = Math.min(scrollTop / maxScroll, 1); // Normalized scroll value (0 to 1)
   
       const elements = [
