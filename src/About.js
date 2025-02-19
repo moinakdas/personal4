@@ -65,41 +65,62 @@ function About() {
     //ABOUT scroll mechanic
    
     useEffect(() => {
-        const speed = 0.5; // Adjust speed of movement
-        const elements = document.querySelectorAll(".about-solid, .about-outline");
-
-        if (elements.length === 0) return; // Ensure elements exist
-
-        // Get width of first element (assuming all are the same size)
-        const elementWidth = elements[0].offsetWidth;
-        const spacing = elementWidth * 1.1; // Element width + 20%
-
-        // Position elements evenly across the screen at start
-        elements.forEach((el, index) => {
-            el.style.position = "absolute";
-            el.style.left = `${index * spacing}px`; // Evenly distribute
-        });
-
-        const animate = () => {
-            let maxRight = Math.max(...Array.from(elements).map(el => parseFloat(el.style.left)));
-
-            elements.forEach((el) => {
-                let left = parseFloat(el.style.left) || 0;
-                left -= speed;
-
-                // Only respawn AFTER the last element has moved a full spacing
-                if (left < -el.offsetWidth) {
-                    left = maxRight + spacing; // Move after last element
-                    maxRight = left; // Update last element position
-                }
-
-                el.style.left = `${left}px`;
-            });
-
-            requestAnimationFrame(animate);
-        };
-
-        animate();
+      const speed = 0.5; // Adjust speed of movement
+      const elements = document.querySelectorAll(".about-solid, .about-outline");
+  
+      if (elements.length === 0) return; // Ensure elements exist
+  
+      // Function to initialize animation once elements are fully rendered
+      const initializeAnimation = () => {
+          const elementWidth = elements[0]?.offsetWidth;
+          
+          // If elementWidth is still 0 or too small, delay and try again
+          if (!elementWidth || elementWidth < 10) {
+              setTimeout(initializeAnimation, 50); // Retry after 50ms
+              return;
+          }
+  
+          const spacing = elementWidth * 1.1; // Element width + 10%
+  
+          // Position elements evenly across the screen at start
+          elements.forEach((el, index) => {
+              el.style.position = "absolute";
+              el.style.left = `${index * spacing}px`; // Evenly distribute
+          });
+  
+          const animate = () => {
+              let maxRight = Math.max(...Array.from(elements).map(el => parseFloat(el.style.left)));
+  
+              elements.forEach((el) => {
+                  let left = parseFloat(el.style.left) || 0;
+                  left -= speed;
+  
+                  // Only respawn AFTER the last element has moved a full spacing
+                  if (left < -el.offsetWidth) {
+                      left = maxRight + spacing; // Move after last element
+                      maxRight = left; // Update last element position
+                  }
+  
+                  el.style.left = `${left}px`;
+              });
+  
+              requestAnimationFrame(animate);
+          };
+  
+          animate();
+      };
+  
+      // Use MutationObserver to check when elements are fully rendered
+      const observer = new MutationObserver(() => {
+          if (document.querySelector(".about-solid") && document.querySelector(".about-outline")) {
+              observer.disconnect(); // Stop observing once elements are ready
+              initializeAnimation(); // Start animation after rendering is confirmed
+          }
+      });
+  
+      observer.observe(document.body, { childList: true, subtree: true });
+  
+      return () => observer.disconnect(); // Cleanup observer on unmount
     }, []);
 
     return (

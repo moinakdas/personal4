@@ -1,0 +1,18 @@
+.transition-container {
+    background-color: blue;
+}
+  
+#transition-image {
+    width: 100vw;
+    object-fit: contain;
+    transition: opacity 0.1s ease-in-out;
+    z-index: 100;
+}
+
+.Transition{
+    width: 100%;
+    height: 100vh;
+    position: sticky;
+    top:0;
+    background-color: #1C1C1C;
+}

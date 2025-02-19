@@ -24,11 +24,11 @@
 }
 
 #card-1{
-    flex: 1.4
+    flex: 8
 }
 
 #card-2{
-    flex: 1.2
+    flex: 1
 }
 
 #card-3{
@@ -106,4 +106,25 @@
     color: white;
     font-size: 1vw;
     line-height: 1.2vw;
+    display: flex;
+}
+
+.card-text{
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.card-images{
+    flex: 1.25;
+    position: relative;
+}
+
+#grouped-logos{
+    content: url("../public/img/grouped-logos.png");
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 20vw;
 }
